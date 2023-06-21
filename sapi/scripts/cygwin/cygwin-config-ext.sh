@@ -17,6 +17,7 @@ REDIS_VERSION=5.3.7
 MONGODB_VERSION=1.14.2
 YAML_VERSION=2.2.2
 IMAGICK_VERSION=3.7.0
+PHP_TDENGINE_VERSION=1.0.6
 
 if [ ! -d pool/ext ]; then
     mkdir -p pool/ext
@@ -54,6 +55,14 @@ if [ ! -d $ROOT/ext/imagick ]; then
     fi
     tar xvf imagick-${IMAGICK_VERSION}.tgz
     mv imagick-${IMAGICK_VERSION} $ROOT/ext/imagick
+fi
+
+if [ ! -d $ROOT/ext/tdengine ]; then
+    if [ ! -f tdengine-${PHP_TDENGINE_VERSION}.tgz ]; then
+        wget https://github.com/Yurunsoft/php-tdengine/archive/refs/tags/v${PHP_TDENGINE_VERSION}.tar.gz -O tdengine-${PHP_TDENGINE_VERSION}.tar.gz
+    fi
+    tar zxvf tdengine-${PHP_TDENGINE_VERSION}.tar.gz
+    mv tdengine-${PHP_TDENGINE_VERSION} $ROOT/ext/tdengine
 fi
 
 cd $ROOT
