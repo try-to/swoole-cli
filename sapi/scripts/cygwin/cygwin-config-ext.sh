@@ -62,7 +62,7 @@ if [ ! -d $ROOT/ext/tdengine ]; then
         wget https://github.com/Yurunsoft/php-tdengine/archive/refs/tags/v${PHP_TDENGINE_VERSION}.tar.gz -O tdengine-${PHP_TDENGINE_VERSION}.tar.gz
     fi
     tar zxvf tdengine-${PHP_TDENGINE_VERSION}.tar.gz
-    mv tdengine-${PHP_TDENGINE_VERSION} $ROOT/ext/tdengine
+    mv php-tdengine-${PHP_TDENGINE_VERSION} $ROOT/ext/tdengine
 fi
 
 cd $ROOT
