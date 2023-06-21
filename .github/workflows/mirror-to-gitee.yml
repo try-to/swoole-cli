@@ -1,6 +1,6 @@
 name: mirror to gitee
 
-on: [ push, delete, create ]
+# on: [ push, delete, create ]
 
 jobs:
   gitee:
