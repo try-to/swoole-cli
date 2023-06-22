@@ -101,8 +101,8 @@ if test "$PHP_TDENGINE" != "no"; then
     TDENGINE_INCLUDE="${PHP_TDENGINE_DIR}/include"
     TDENGINE_LIBDIR="${PHP_TDENGINE_DIR}/driver"
   else
-    TDENGINE_INCLUDE="./taos/include"
-    TDENGINE_LIBDIR="./taos/driver"
+    TDENGINE_INCLUDE="$ext_builddir/taos/include"
+    TDENGINE_LIBDIR="$ext_builddir/taos/driver"
   fi
 
   PHP_CHECK_LIBRARY(taos, taos_init,
