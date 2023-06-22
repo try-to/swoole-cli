@@ -33,6 +33,14 @@ jobs:
       - name: Install re2c
         run: |
           bash ./sapi/scripts/cygwin/install-re2c.sh
+
+      - name: Download TDengine
+        run: ./sapi/script/cygwin/download-tdengine.ps1
+
+      - name: Build TDengine
+        shell: cmd
+        run: ./sapi/script/cygwin/build-tdengine.bat
+
       - name: Configure
         run: |
           uname -a
