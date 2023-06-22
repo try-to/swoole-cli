@@ -13,7 +13,17 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.eol lf
           ipconfig
+
       - uses: actions/checkout@v3
+
+      - name: Download TDengine
+        run: |
+          bash ./sapi/scripts/cygwin/download-tdengine.sh
+
+      - name: Build TDengine
+        shell: cmd
+        run: ./sapi/scripts/cygwin/build-tdengine.bat
+
       - name: Prepare submodule
         run: |
           git submodule update --init
@@ -33,15 +43,6 @@ jobs:
       - name: Install re2c
         run: |
           bash ./sapi/scripts/cygwin/install-re2c.sh
-
-      - name: Download TDengine
-        run: |
-          bash ./sapi/script/cygwin/download-tdengine.sh
-
-      - name: Build TDengine
-        shell: cmd
-        run: ./sapi/script/cygwin/build-tdengine.bat
-
       - name: Configure
         run: |
           uname -a
