@@ -35,7 +35,8 @@ jobs:
           bash ./sapi/scripts/cygwin/install-re2c.sh
 
       - name: Download TDengine
-        run: ./sapi/script/cygwin/download-tdengine.ps1
+        run: |
+          bash ./sapi/script/cygwin/download-tdengine.sh
 
       - name: Build TDengine
         shell: cmd
