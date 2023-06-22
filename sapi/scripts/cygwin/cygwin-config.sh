@@ -55,4 +55,4 @@ test -f Makefile && make clean
     --with-imagick \
     --with-yaml \
     --with-readline \
-    --enable-tdengine --with-tdengine-dir=C:\TDengine
+    --with-tdengine --enable-swoole --with-tdengine-dir=C:\TDengine
