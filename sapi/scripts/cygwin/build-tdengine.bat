@@ -1,5 +1,7 @@
 @ECHO OFF
 
+echo %PATH%
+
 c:
 
 cd C:\
@@ -25,6 +27,8 @@ cmake .. -G "NMake Makefiles" -DBUILD_JDBC=false -DTD_BUILD_HTTP=false -DTD_BUIL
 nmake
 
 nmake install
+
+ls release\build
 
 c:
 
