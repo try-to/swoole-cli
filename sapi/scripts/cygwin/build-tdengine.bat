@@ -1,6 +1,11 @@
 @ECHO OFF
 
 d:
+
+cd D:\
+
+git clone --recurse -b ver-3.0.5.1 --depth=1 https://github.com/taosdata/TDengine.git
+
 cd "D:\TDengine"
 
 mkdir release
@@ -14,5 +19,7 @@ cmake .. -G "NMake Makefiles" -DBUILD_JDBC=false -DTD_BUILD_HTTP=false -DTD_BUIL
 nmake
 
 nmake install
+
+ls "C:\TDengine\"
 
 copy "C:\TDengine\driver\taos.dll" "C:\Windows\System32"
