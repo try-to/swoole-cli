@@ -1,13 +1,5 @@
 @ECHO OFF
 
-echo %PATH%
-
-c:
-
-cd C:\
-
-mkdir TDengine
-
 d:
 
 cd D:\
@@ -22,24 +14,13 @@ cd release
 
 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
 
-cmake .. -G "NMake Makefiles" -DBUILD_JDBC=false -DTD_BUILD_HTTP=false -DTD_BUILD_LUA=false
+@REM cmake .. -G "NMake Makefiles" -DBUILD_JDBC=false -DTD_BUILD_HTTP=false -DTD_BUILD_LUA=false
+cmake .. -G "NMake Makefiles"
 
 nmake
 
 nmake install
 
-ls release\build
-
-c:
-
-cd C:\
-
-echo %~dp0
-
-ls "C:\"
-
-ls "C:\TDengine\"
-
-ls "C:\Program Files (x86)\TDengine\"
+echo %PATH%
 
 copy "C:\TDengine\driver\taos.dll" "C:\Windows\System32"
