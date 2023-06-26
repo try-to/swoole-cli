@@ -1,5 +1,11 @@
 @ECHO OFF
 
+c:
+
+cd C:\
+
+mkdir TDengine
+
 d:
 
 cd D:\
@@ -23,6 +29,10 @@ nmake install
 c:
 
 cd C:\
+
+echo %~dp0
+
+ls "C:\"
 
 ls "C:\TDengine\"
 
