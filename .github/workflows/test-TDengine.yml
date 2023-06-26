@@ -1,4 +1,4 @@
-name: build-swoole-cli-windows-cygwin
+name: build-test-tdengine
 
 on: [ push, pull_request ]
 
@@ -14,7 +14,6 @@ jobs:
           git config --global core.eol lf
           ipconfig
 
-      - uses: actions/checkout@v3
       - name: Build TDengine
         shell: cmd
         run: ./sapi/scripts/cygwin/build-tdengine.bat

@@ -20,6 +20,12 @@ nmake
 
 nmake install
 
+c:
+
+cd C:\
+
 ls "C:\TDengine\"
+
+ls "C:\Program Files (x86)\TDengine\"
 
 copy "C:\TDengine\driver\taos.dll" "C:\Windows\System32"
