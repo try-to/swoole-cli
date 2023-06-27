@@ -14,4 +14,4 @@ ROOT=${__PROJECT__}
 
 ls "C:\TDengine"
 
-ls "C:\Program Files (x86)\TDengine"
+C:\TDengine\taos.exe -V
