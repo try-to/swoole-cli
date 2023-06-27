@@ -20,3 +20,7 @@ jobs:
         run: |
           ./sapi/scripts/cygwin/build-tdengine.bat
           bash ./sapi/scripts/cygwin/test.sh
+      - name: TEST TDengine
+        run: |
+          bash ./sapi/scripts/cygwin/test.sh
+          taos -V
