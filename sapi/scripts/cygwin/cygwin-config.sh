@@ -50,9 +50,9 @@ test -f Makefile && make clean
     --with-sodium \
     --enable-xml --enable-simplexml --enable-xmlreader --enable-xmlwriter --enable-dom --with-libxml \
     --enable-gd --with-jpeg  --with-freetype \
-    --enable-tdengine --with-tdengine-dir=/cygdrive/c/TDengine \
     --enable-swoole --enable-sockets --enable-mysqlnd --enable-swoole-curl --enable-cares \
     --enable-redis \
     --with-imagick \
     --with-yaml \
     --with-readline \
+    --enable-tdengine --with-tdengine-dir=/cygdrive/c/TDengine
