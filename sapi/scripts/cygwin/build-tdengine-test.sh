@@ -13,5 +13,3 @@ cd ${__PROJECT__}
 ROOT=${__PROJECT__}
 
 ls "C:\TDengine"
-
-C:\TDengine\taos.exe -V
