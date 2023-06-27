@@ -25,6 +25,7 @@ if [ ! -d pool/ext ]; then
 fi
 
 cd $ROOT/ext/swoole
+git config --global --add safe.directory $ROOT/ext/swoole
 git checkout v${SWOOLE_VERSION}
 
 cd $ROOT
