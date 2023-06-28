@@ -27,9 +27,6 @@ fi
 cd $ROOT/ext/swoole
 git config --global --add safe.directory $ROOT/ext/swoole
 git checkout v${SWOOLE_VERSION}
-git pull
-
-ls /cygdrive/c/TDengine
 
 cd $ROOT
 cd pool/ext
