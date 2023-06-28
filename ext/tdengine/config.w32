@@ -1,5 +1,7 @@
 ARG_ENABLE('tdengine', 'tdengine support', 'yes');
 
+ARG_WITH('tdengine_dir', 'Include TDengine support (requires TDengine >= 2.0.0)', 'C:\\TDengine');
+
 function checkTaosTstrerror()
 {
     var FSO = WScript.CreateObject("Scripting.FileSystemObject");
@@ -14,9 +16,11 @@ function checkTaosTstrerror()
 if (PHP_TDENGINE != 'no') {
 	AC_DEFINE('HAVE_TDENGINE', 1, 'tdengine support enabled');
 
-	ARG_WITH('tdengine_dir', 'Include TDengine support (requires TDengine >= 2.0.0)', '/cygdrive/c/TDengine');
+    if(!CHECK_HEADER_ADD_INCLUDE("taos.h", "CFLAGS_TDENGINE", PHP_TDENGINE_DIR + '/include')) {
+        ERROR("NOT FOUND: TDengine install directory.");
+    }
+
 	CHECK_LIB('taos.lib', 'tdengine', PHP_TDENGINE_DIR + '\\driver');
-	CHECK_HEADER_ADD_INCLUDE('taos.h', 'CFLAGS_TDENGINE', PHP_TDENGINE_DIR + '\\include');
     CHECK_FUNC_IN_HEADER('taos.h', 'TAOS_BIND', PHP_TDENGINE_DIR + '\\include')
 
     if (!checkTaosTstrerror())
