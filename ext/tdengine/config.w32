@@ -14,6 +14,9 @@ function checkTaosTstrerror()
 }
 
 if (PHP_TDENGINE != 'no') {
+
+    ADD_EXTENSION_DEP('tdengine', 'swoole', true);
+
 	AC_DEFINE('HAVE_TDENGINE', 1, 'tdengine support enabled');
 
 	CHECK_LIB('taos.lib', 'tdengine', PHP_TDENGINE_DIR + '\\driver');
