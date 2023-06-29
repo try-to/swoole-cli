@@ -48,5 +48,5 @@ if (PHP_TDENGINE != 'no') {
         ADD_FLAG("CFLAGS_TDENGINE", '/D PHP_TDENGINE_EXPORTS');
     }
 
-	EXTENSION('tdengine', 'tdengine.cc', shared, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1', 'php_tdengine.dll');
+	EXTENSION('tdengine', 'tdengine.cc', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
 }
