@@ -1,17 +1,6 @@
 ARG_ENABLE('tdengine', 'tdengine support', "yes");
 
-ARG_WITH('tdengine_dir', 'Include TDengine support (requires TDengine >= 2.0.0)', 'C:\\TDengine');
-
-function checkTaosTstrerror()
-{
-    var FSO = WScript.CreateObject("Scripting.FileSystemObject");
-    if (header = FSO.OpenTextFile(PHP_TDENGINE_DIR + '\\include\\taoserror.h', 1)) {
-        contents = header.ReadAll();
-        header.Close();
-        return contents.indexOf('DLL_EXPORT const char* tstrerror') >= 0;
-    }
-    return false;
-}
+ARG_WITH('tdengine_dir', 'Include TDengine support (requires TDengine >= 3.0.0)', 'C:\\TDengine');
 
 if (PHP_TDENGINE != 'no') {
 
@@ -19,12 +8,16 @@ if (PHP_TDENGINE != 'no') {
 
 	AC_DEFINE('HAVE_TDENGINE', 1, 'tdengine support enabled');
 
-	CHECK_LIB('taos.lib', 'tdengine', PHP_TDENGINE_DIR + '\\driver');
-    CHECK_HEADER_ADD_INCLUDE('taos.h', 'CFLAGS_TDENGINE', PHP_TDENGINE_DIR + '\\include');
+    if (!CHECK_LIB("taos.lib", "tdengine", PHP_TDENGINE_DIR + '\\driver')) {
+        ERROR("tdengine: library 'taos.lib' not found");
+    }
 
-    if (!checkTaosTstrerror())
-    {
-        AC_DEFINE('NO_TSTRERROR', 1, "Detected compiler version");
+    if (!CHECK_HEADER_ADD_INCLUDE("taos.h", "CFLAGS_TDENGINE", PHP_TDENGINE_DIR + '\\include')) {
+        ERROR("tdengine: header 'taos.h' not found");
+    }
+
+    if (!CHECK_HEADER_ADD_INCLUDE("taoserror.h", "CFLAGS_TDENGINE", PHP_TDENGINE_DIR + '\\include')) {
+        ERROR("tdengine: header 'taoserror.h' not found");
     }
 
     ADD_FLAG('CFLAGS_TDENGINE', '/I "' + PHP_TDENGINE_DIR + '\\include"');
