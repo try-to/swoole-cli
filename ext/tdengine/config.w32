@@ -1,4 +1,4 @@
-ARG_ENABLE('tdengine', 'tdengine support', 'yes');
+ARG_ENABLE('tdengine', 'tdengine support', "yes");
 
 ARG_WITH('tdengine_dir', 'Include TDengine support (requires TDengine >= 2.0.0)', 'C:\\TDengine');
 
@@ -18,15 +18,16 @@ if (PHP_TDENGINE != 'no') {
 
 	CHECK_LIB('taos.lib', 'tdengine', PHP_TDENGINE_DIR + '\\driver');
     CHECK_HEADER_ADD_INCLUDE('taos.h', 'CFLAGS_TDENGINE', PHP_TDENGINE_DIR + '\\include');
-    CHECK_FUNC_IN_HEADER('taos.h', 'TAOS_BIND', PHP_TDENGINE_DIR + '\\include')
 
     if (!checkTaosTstrerror())
     {
         AC_DEFINE('NO_TSTRERROR', 1, "Detected compiler version");
     }
 
+    ADD_FLAG('CFLAGS_TDENGINE', '/I "' + PHP_TDENGINE_DIR + '\\include"');
     ADD_FLAG('CFLAGS_TDENGINE', '/I "' + configure_module_dirname + '"');
     ADD_FLAG('CFLAGS_TDENGINE', '/I "' + configure_module_dirname + '\\include"');
+
     ADD_FLAG("CFLAGS_TDENGINE", '/D PHP_TDENGINE_EXPORTS');
 
     EXTENSION('tdengine', 'tdengine.cc', true, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
