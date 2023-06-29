@@ -29,7 +29,7 @@ if (PHP_TDENGINE != 'no') {
     ADD_FLAG('CFLAGS_TDENGINE', '/I "' + configure_module_dirname + '\\include"');
     ADD_FLAG("CFLAGS_TDENGINE", '/D PHP_TDENGINE_EXPORTS');
 
-    EXTENSION('tdengine', 'tdengine.cc', false, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+    EXTENSION('tdengine', 'tdengine.cc', true, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
 
     TDENGINE_SOURCES=" ext_taos.cc \
 			ext_taos_connection.cc \
