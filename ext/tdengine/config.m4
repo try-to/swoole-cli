@@ -47,13 +47,13 @@ if test "$PHP_TDENGINE" != "no"; then
 
   PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
 
-  PHP_ADD_INCLUDE([$ext_builddir/include])
-  PHP_ADD_INCLUDE([$ext_srcdir/include])
-
   AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
   PHP_ADD_EXTENSION_DEP(tdengine, swoole)
+
+  PHP_ADD_INCLUDE([$phpincludedir/ext/tdengine])
+  PHP_ADD_INCLUDE([$phpincludedir/ext/tdengine/include])
 
   PHP_NEW_EXTENSION(tdengine, tdengine.cc src/ext_taos.cc src/ext_taos_connection.cc src/ext_taos_resource.cc src/ext_taos_statement.cc, $ext_shared,,, cxx)
 
