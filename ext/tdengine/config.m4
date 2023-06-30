@@ -47,6 +47,9 @@ if test "$PHP_TDENGINE" != "no"; then
 
   PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
 
+  PHP_ADD_INCLUDE([$ext_builddir/include])
+  PHP_ADD_INCLUDE([$ext_srcdir/include])
+
   AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
