@@ -46,6 +46,11 @@ if test "$PHP_TDENGINE" != "no"; then
 
   AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
 
+  AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
+  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
+  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
+  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
+
   tdengine_source_file=" \
     tdengine.cc \
     src/ext_taos.cc \
@@ -67,10 +72,5 @@ if test "$PHP_TDENGINE" != "no"; then
   else
     CXXFLAGS="$CXXFLAGS -std=c++11"
   fi
-
-  AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
-  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
-  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
-  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
 
 fi
