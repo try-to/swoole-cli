@@ -44,6 +44,8 @@ if test "$PHP_TDENGINE" != "no"; then
   PHP_SUBST(TDENGINE_SHARED_LIBADD)
   PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
 
+  AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
+
   tdengine_source_file=" \
     tdengine.cc \
     src/ext_taos.cc \
@@ -55,9 +57,8 @@ if test "$PHP_TDENGINE" != "no"; then
 
   PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,, cxx)
 
-  AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
-
-  PHP_INSTALL_HEADERS([ext/tdengine], [include/*.h php_tdengine.h])
+  PHP_ADD_INCLUDE([$ext_srcdir])
+  PHP_ADD_INCLUDE([$ext_srcdir/include])
 
   PHP_REQUIRE_CXX()
 
