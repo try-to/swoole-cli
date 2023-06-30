@@ -11,8 +11,6 @@ if test "$PHP_TDENGINE" != "no"; then
     [AS_HELP_STRING([[--with-tdengine-dir[=DIR]]],
       [Include TDengine support (requires TDengine >= 2.0.0)])], [no], [no])
 
-  AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
-
   if test "$PHP_TDENGINE_DIR" != "no"; then
     TDENGINE_INCLUDE="${PHP_TDENGINE_DIR}/include"
     TDENGINE_LIBDIR="${PHP_TDENGINE_DIR}/driver"
@@ -42,15 +40,6 @@ if test "$PHP_TDENGINE" != "no"; then
     []
   )
 
-  PHP_ADD_LIBRARY_WITH_PATH(taos, $TDENGINE_LIBDIR, TDENGINE_SHARED_LIBADD)
-  PHP_SUBST(TDENGINE_SHARED_LIBADD)
-  PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
-
-  AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
-  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
-  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
-  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
-
   tdengine_source_file=" \
     tdengine.cc \
     src/ext_taos.cc \
@@ -62,15 +51,25 @@ if test "$PHP_TDENGINE" != "no"; then
 
   PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,, cxx)
 
+  AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
+
   PHP_INSTALL_HEADERS([ext/tdengine], [include/*.h php_tdengine.h])
 
   PHP_REQUIRE_CXX()
-
 
   if test "$TD_OS" = "CYGWIN" || test "$TD_OS" = "MINGW"; then
     CXXFLAGS="$CXXFLAGS -std=gnu++11"
   else
     CXXFLAGS="$CXXFLAGS -std=c++11"
   fi
+
+  PHP_ADD_LIBRARY_WITH_PATH(taos, $TDENGINE_LIBDIR, TDENGINE_SHARED_LIBADD)
+  PHP_SUBST(TDENGINE_SHARED_LIBADD)
+  PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
+
+  AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
+  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
+  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
+  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
 
 fi
