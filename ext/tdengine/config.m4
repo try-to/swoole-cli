@@ -40,6 +40,10 @@ if test "$PHP_TDENGINE" != "no"; then
     []
   )
 
+  PHP_ADD_LIBRARY_WITH_PATH(taos, $TDENGINE_LIBDIR, TDENGINE_SHARED_LIBADD)
+  PHP_SUBST(TDENGINE_SHARED_LIBADD)
+  PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
+
   tdengine_source_file=" \
     tdengine.cc \
     src/ext_taos.cc \
@@ -62,10 +66,6 @@ if test "$PHP_TDENGINE" != "no"; then
   else
     CXXFLAGS="$CXXFLAGS -std=c++11"
   fi
-
-  PHP_ADD_LIBRARY_WITH_PATH(taos, $TDENGINE_LIBDIR, TDENGINE_SHARED_LIBADD)
-  PHP_SUBST(TDENGINE_SHARED_LIBADD)
-  PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
 
   AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
