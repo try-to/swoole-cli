@@ -49,7 +49,6 @@ if test "$PHP_TDENGINE" != "no"; then
   AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
-  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
 
   tdengine_source_file=" \
     tdengine.cc \
@@ -61,6 +60,8 @@ if test "$PHP_TDENGINE" != "no"; then
   dnl CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings"
 
   PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1)
+
+  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
 
   dnl PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,, cxx)
 
