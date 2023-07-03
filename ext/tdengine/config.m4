@@ -58,18 +58,18 @@ if test "$PHP_TDENGINE" != "no"; then
     src\ext_taos_resource.cc \
     src\ext_taos_statement.cc";
 
-  dnl CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings"
+  PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1, cxx)
 
-  PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared)
-
-  PHP_INSTALL_HEADERS("", "ext/tdengine ext/tdengine/include");
+  PHP_INSTALL_HEADERS([ext/tdengine], [*.h php_tdengine.h php_tdengine.h include/*.h])
 
   dnl PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,, cxx)
 
   dnl PHP_ADD_INCLUDE([$ext_srcdir])
   dnl PHP_ADD_INCLUDE([$ext_srcdir/include])
 
-  dnl PHP_REQUIRE_CXX()
+  PHP_REQUIRE_CXX()
+
+  CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings"
 
   if test "$TD_OS" = "CYGWIN" || test "$TD_OS" = "MINGW"; then
     CXXFLAGS="$CXXFLAGS -std=gnu++11"
