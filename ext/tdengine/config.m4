@@ -49,19 +49,20 @@ if test "$PHP_TDENGINE" != "no"; then
   AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
+  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
 
   tdengine_source_file=" \
     tdengine.cc \
-    ext_taos.cc \
-    ext_taos_connection.cc \
-    ext_taos_resource.cc \
-    ext_taos_statement.cc";
+    src\ext_taos.cc \
+    src\ext_taos_connection.cc \
+    src\ext_taos_resource.cc \
+    src\ext_taos_statement.cc";
 
   dnl CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings"
 
   PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1)
 
-  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
+  PHP_INSTALL_HEADERS("", "ext/tdengine ext/tdengine/include");
 
   dnl PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,, cxx)
 
@@ -70,10 +71,10 @@ if test "$PHP_TDENGINE" != "no"; then
 
   dnl PHP_REQUIRE_CXX()
 
-  dnl if test "$TD_OS" = "CYGWIN" || test "$TD_OS" = "MINGW"; then
-  dnl   CXXFLAGS="$CXXFLAGS -std=gnu++11"
-  dnl else
-  dnl   CXXFLAGS="$CXXFLAGS -std=c++11"
-  dnl fi
+  if test "$TD_OS" = "CYGWIN" || test "$TD_OS" = "MINGW"; then
+    CXXFLAGS="$CXXFLAGS -std=gnu++11"
+  else
+    CXXFLAGS="$CXXFLAGS -std=c++11"
+  fi
 
 fi
