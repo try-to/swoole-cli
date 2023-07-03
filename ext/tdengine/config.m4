@@ -53,10 +53,10 @@ if test "$PHP_TDENGINE" != "no"; then
 
   tdengine_source_file=" \
     tdengine.cc \
-    src\ext_taos.cc \
-    src\ext_taos_connection.cc \
-    src\ext_taos_resource.cc \
-    src\ext_taos_statement.cc";
+    ext_taos.cc \
+    ext_taos_connection.cc \
+    ext_taos_resource.cc \
+    ext_taos_statement.cc";
 
   PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1, cxx)
 
