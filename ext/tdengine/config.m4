@@ -60,7 +60,7 @@ if test "$PHP_TDENGINE" != "no"; then
 
   PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1, cxx)
 
-  PHP_INSTALL_HEADERS([ext/tdengine], [*.h php_tdengine.h php_tdengine.h include/*.h])
+  dnl PHP_INSTALL_HEADERS([ext/tdengine], [*.h php_tdengine.h php_tdengine.h include/*.h])
 
   dnl PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,, cxx)
 
