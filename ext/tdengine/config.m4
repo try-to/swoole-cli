@@ -60,7 +60,7 @@ if test "$PHP_TDENGINE" != "no"; then
 
   dnl CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings"
 
-  PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1)
+  PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared)
 
   PHP_INSTALL_HEADERS("", "ext/tdengine ext/tdengine/include");
 
