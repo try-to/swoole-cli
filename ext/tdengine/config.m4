@@ -47,10 +47,10 @@ if test "$PHP_TDENGINE" != "no"; then
     ext_taos_resource.cc \
     ext_taos_statement.cc";
 
-  dnl AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
-  dnl PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
-  dnl PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
-  dnl PHP_ADD_EXTENSION_DEP(tdengine, swoole)
+  AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
+  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
+  PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
+  PHP_ADD_EXTENSION_DEP(tdengine, swoole)
 
   PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
   PHP_ADD_LIBRARY_WITH_PATH(taos, $TDENGINE_LIBDIR, TDENGINE_SHARED_LIBADD)
