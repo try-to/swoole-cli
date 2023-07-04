@@ -40,17 +40,6 @@ if test "$PHP_TDENGINE" != "no"; then
     []
   )
 
-  PHP_ADD_LIBRARY_WITH_PATH(taos, $TDENGINE_LIBDIR, TDENGINE_SHARED_LIBADD)
-  PHP_SUBST(TDENGINE_SHARED_LIBADD)
-  PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
-
-  AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
-
-  dnl AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
-  dnl PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
-  dnl PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
-  dnl PHP_ADD_EXTENSION_DEP(tdengine, swoole)
-
   tdengine_source_file=" \
     tdengine.cc \
     ext_taos.cc \
@@ -58,23 +47,32 @@ if test "$PHP_TDENGINE" != "no"; then
     ext_taos_resource.cc \
     ext_taos_statement.cc";
 
-  PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1, cxx)
+  dnl AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
+  dnl PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
+  dnl PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
+  dnl PHP_ADD_EXTENSION_DEP(tdengine, swoole)
 
-  dnl PHP_INSTALL_HEADERS([ext/tdengine], [*.h php_tdengine.h php_tdengine.h include/*.h])
+  PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
+  PHP_ADD_LIBRARY_WITH_PATH(taos, $TDENGINE_LIBDIR, TDENGINE_SHARED_LIBADD)
 
-  dnl PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,, cxx)
+  dnl CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings"
 
-  dnl PHP_ADD_INCLUDE([$ext_srcdir])
-  dnl PHP_ADD_INCLUDE([$ext_srcdir/include])
+  dnl if test "$TD_OS" = "CYGWIN" || test "$TD_OS" = "MINGW"; then
+  dnl   CXXFLAGS="$CXXFLAGS -std=gnu++11"
+  dnl else
+  dnl   CXXFLAGS="$CXXFLAGS -std=c++11"
+  dnl fi
 
   PHP_REQUIRE_CXX()
 
-  CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings"
+  PHP_ADD_LIBRARY(stdc++, 1, TDENGINE_SHARED_LIBADD)
 
-  if test "$TD_OS" = "CYGWIN" || test "$TD_OS" = "MINGW"; then
-    CXXFLAGS="$CXXFLAGS -std=gnu++11"
-  else
-    CXXFLAGS="$CXXFLAGS -std=c++11"
-  fi
+  dnl PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1, cxx)
+
+  PHP_SUBST(TDENGINE_SHARED_LIBADD)
+
+  PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared)
+
+  AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
 
 fi
