@@ -62,14 +62,14 @@ if test "$PHP_TDENGINE" != "no"; then
     CXXFLAGS="$CXXFLAGS -std=c++11"
   fi
 
+  AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
+
   PHP_REQUIRE_CXX()
 
-  dnl PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1, cxx)
+  PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1, cxx)
 
   PHP_SUBST(TDENGINE_SHARED_LIBADD)
 
-  PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,,cxx)
-
-  AC_DEFINE(HAVE_TDENGINE, 1, [ Have tdengine support ])
+  dnl PHP_NEW_EXTENSION(tdengine, $tdengine_source_file, $ext_shared,,,cxx)
 
 fi
