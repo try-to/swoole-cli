@@ -1,6 +1,6 @@
-name: build-test-windows-tdengine
+name: build-windows-ffi
 
-on: []
+on: [ push, pull_request ]
 
 
 jobs:
@@ -13,16 +13,6 @@ jobs:
           git config --global core.autocrlf false
           git config --global core.eol lf
           ipconfig
-
-      - uses: actions/checkout@v3
-      - name: Build TDengine
-        shell: cmd
-        run: |
-          ./sapi/scripts/cygwin/build-tdengine.bat
-      - name: TEST TDengine
-        run: |
-          bash ./sapi/scripts/cygwin/build-tdengine-test.sh
-
       - name: Prepare submodule
         run: |
           git submodule update --init
@@ -38,7 +28,7 @@ jobs:
         uses: cygwin/cygwin-install-action@v3
         with:
           platform: x64
-          packages: make wget tar libtool re2c bison gcc-g++ autoconf automake openssl libpcre2-devel libssl-devel libcurl-devel libxml2-devel libxslt-devel libgmp-devel ImageMagick libpng-devel libjpeg-devel libfreetype-devel libwebp-devel libsqlite3-devel zlib-devel libbz2-devel liblz4-devel liblzma-devel libzip-devel libicu-devel libonig-devel libcares-devel libsodium-devel libyaml-devel libMagick-devel libzstd-devel libbrotli-devel libreadline-devel  libintl-devel libpq-devel libssh2-devel libidn2-devel gettext-devel coreutils openssl-devel zip unzip
+          packages: make wget tar libtool re2c bison gcc-g++ autoconf automake openssl libpcre2-devel libssl-devel libcurl-devel libxml2-devel libxslt-devel libgmp-devel ImageMagick libpng-devel libjpeg-devel libfreetype-devel libwebp-devel libsqlite3-devel zlib-devel libbz2-devel liblz4-devel liblzma-devel libzip-devel libicu-devel libonig-devel libcares-devel libsodium-devel libyaml-devel libMagick-devel libzstd-devel libbrotli-devel libreadline-devel libintl-devel libpq-devel libssh2-devel libidn2-devel libffi-devel gettext-devel coreutils openssl-devel zip unzip
       - name: Install re2c
         run: |
           bash ./sapi/scripts/cygwin/install-re2c.sh
