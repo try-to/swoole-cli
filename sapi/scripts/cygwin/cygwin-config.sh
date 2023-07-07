@@ -32,7 +32,6 @@ test -f Makefile && make clean
     --enable-ctype \
     --with-zlib \
     --with-zip \
-    --with-ffi \
     --enable-posix \
     --enable-sockets \
     --enable-pdo \
@@ -56,4 +55,5 @@ test -f Makefile && make clean
     --with-imagick \
     --with-yaml \
     --with-readline \
+    --with-ffi
     # --enable-tdengine --with-tdengine-dir=/cygdrive/c/TDengine
