@@ -29,9 +29,9 @@ jobs:
     runs-on: windows-latest
 
     env:
-      CYGWIN_PLATFORM: `${{ (github.event.inputs && github.event.inputs.cygwin_platform) || LIB_CYGWIN_PLATFORM }}`
-      CYGWIN_PACKAGES: `${{ LIB_CYGWIN_PACKAGES }} ${{ (github.event.inputs && github.event.inputs.add_cygwin_packages) }}`
-      SWOOLE_VERSION: `${{ (github.event.inputs && github.event.inputs.swoole_version) || LIB_SWOOLE_VERSION }}`
+      CYGWIN_PLATFORM: `${{ (github.event.inputs && github.event.inputs.cygwin_platform) || env.LIB_CYGWIN_PLATFORM }}`
+      CYGWIN_PACKAGES: `${{ env.LIB_CYGWIN_PACKAGES }} ${{ (github.event.inputs && github.event.inputs.add_cygwin_packages) }}`
+      SWOOLE_VERSION: `${{ (github.event.inputs && github.event.inputs.swoole_version) || env.LIB_SWOOLE_VERSION }}`
 
     steps:
       - name: Prepare git
