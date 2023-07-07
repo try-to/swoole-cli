@@ -18,7 +18,7 @@ MONGODB_VERSION=1.14.2
 YAML_VERSION=2.2.2
 IMAGICK_VERSION=3.7.0
 PHP_TDENGINE_VERSION=1.0.6
-PHP_SWOOLE_VERSION=${SWOOLE_VERSION}
+SWOOLE_VERSION=4.8.13
 
 if [ ! -d pool/ext ]; then
     mkdir -p pool/ext
@@ -26,7 +26,7 @@ fi
 
 cd $ROOT/ext/swoole
 git config --global --add safe.directory $ROOT/ext/swoole
-git checkout v${PHP_SWOOLE_VERSION}
+git checkout v${SWOOLE_VERSION}
 
 cd $ROOT
 cd pool/ext
