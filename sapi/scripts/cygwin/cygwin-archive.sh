@@ -11,4 +11,8 @@ __PROJECT__=$(
 )
 cd ${__PROJECT__}
 
+bin/swoole-cli -v
+bin/swoole-cli -m
+bin/swoole-cli --ri swoole
+
 bin/swoole-cli sapi/scripts/cygwin/cygwin-pack.php
