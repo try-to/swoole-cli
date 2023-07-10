@@ -122,12 +122,12 @@ if test "$PHP_TDENGINE" != "no"; then
 
   PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
 
-  if test "$PHP_SWOOLE" = "yes"; then
-    AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
-    PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
-    PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
-    PHP_ADD_EXTENSION_DEP(tdengine, swoole)
-  fi
+  dnl if test "$PHP_SWOOLE" = "yes"; then
+  dnl   AC_DEFINE(HAVE_SWOOLE, 1, [use swoole])
+  dnl   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole])
+  dnl   PHP_ADD_INCLUDE([$phpincludedir/ext/swoole/include])
+  dnl   PHP_ADD_EXTENSION_DEP(tdengine, swoole)
+  dnl fi
 
   PHP_NEW_EXTENSION(tdengine, tdengine.cc ext_taos.cc ext_taos_connection.cc ext_taos_resource.cc ext_taos_statement.cc, $ext_shared,,, cxx)
 
