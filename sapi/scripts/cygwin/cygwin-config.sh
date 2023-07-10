@@ -55,5 +55,5 @@ test -f Makefile && make clean
     --with-imagick \
     --with-yaml \
     --with-readline \
-    --with-ffi
-    # --enable-tdengine --with-tdengine-dir=/cygdrive/c/TDengine
+    --with-ffi \
+    --enable-tdengine --with-tdengine-dir=/cygdrive/c/TDengine
