@@ -118,6 +118,16 @@ if test "$PHP_TDENGINE" != "no"; then
   ], [], [#include <taos.h>])
 
   PHP_ADD_LIBRARY_WITH_PATH(taos, $TDENGINE_LIBDIR, TDENGINE_SHARED_LIBADD)
+
+  AS_CASE([$host_os],
+    [darwin*], [TD_OS="MAC"],
+    [cygwin*], [TD_OS="CYGWIN"],
+    [mingw*], [TD_OS="MINGW"],
+    [linux*], [TD_OS="LINUX"],
+    [*bsd*], [TD_OS="BSD"],
+    []
+  )
+
   PHP_SUBST(TDENGINE_SHARED_LIBADD)
 
   PHP_ADD_INCLUDE($TDENGINE_INCLUDE)
@@ -133,5 +143,12 @@ if test "$PHP_TDENGINE" != "no"; then
 
   PHP_REQUIRE_CXX()
   
-  CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings -std=c++11"
+  CXXFLAGS="$CXXFLAGS -Wall -Wno-unused-function -Wno-deprecated -Wno-deprecated-declarations -Wwrite-strings"
+
+  if test "$TD_OS" = "CYGWIN" || test "$TD_OS" = "MINGW"; then
+    CXXFLAGS="$CXXFLAGS -std=gnu++11"
+  else
+    CXXFLAGS="$CXXFLAGS -std=c++11"
+  fi
+
 fi
