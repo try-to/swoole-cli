@@ -18,6 +18,7 @@ MONGODB_VERSION=1.14.2
 YAML_VERSION=2.2.2
 IMAGICK_VERSION=3.7.0
 PHP_TDENGINE_VERSION=1.0.6
+PDO_TAOS_VERSION=1.0.3
 SWOOLE_VERSION=4.8.13
 
 if [ ! -d pool/ext ]; then
@@ -70,6 +71,14 @@ fi
 #     tar zxvf tdengine-${PHP_TDENGINE_VERSION}.tar.gz
 #     mv php-tdengine-${PHP_TDENGINE_VERSION} $ROOT/ext/tdengine
 # fi
+
+if [ ! -d $ROOT/ext/pdo_taos ]; then
+    if [ ! -f pdo_taos-${PDO_TAOS_VERSION}.tgz ]; then
+        wget https://github.com/bearlord/pdo_taos/archive/refs/tags/${PDO_TAOS_VERSION}.tar.gz -O pdo_taos-${PDO_TAOS_VERSION}.tar.gz
+    fi
+    tar zxvf pdo_taos-${PDO_TAOS_VERSION}.tar.gz
+    mv pdo_taos-${PDO_TAOS_VERSION} $ROOT/ext/pdo_taos
+fi
 
 cd $ROOT
 
