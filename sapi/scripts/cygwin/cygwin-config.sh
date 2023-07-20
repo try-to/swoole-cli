@@ -55,6 +55,6 @@ test -f Makefile && make clean
     --with-imagick \
     --with-yaml \
     --with-readline \
-    --with-ffi \
-    --enable-pdo_taos --with-taos-dir=/cygdrive/c/TDengine
+    --with-ffi
     # --enable-tdengine --with-tdengine-dir=/cygdrive/c/TDengine
+    # --enable-pdo_taosw --with-taos-dir=/cygdrive/c/TDengine

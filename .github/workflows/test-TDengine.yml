@@ -1,6 +1,6 @@
 name: build-test-windows-tdengine
 
-on: [ push, pull_request ]
+on: []
 
 
 jobs:
