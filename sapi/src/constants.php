@@ -68,3 +68,4 @@ define("CJSON_PREFIX", $p->getGlobalPrefix() . '/cjson');
 define("GFLAGS_PREFIX", $p->getGlobalPrefix() . '/gflags');
 define("LIBURING_PREFIX", $p->getGlobalPrefix() . '/liburing');
 define("JANSSON_PREFIX", $p->getGlobalPrefix() . '/jansson');
+define("LIBFFI_PREFIX", $p->getGlobalPrefix() . '/libffi');
