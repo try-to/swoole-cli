@@ -70,4 +70,9 @@ abstract class Project
         $this->url = $url;
         return $this;
     }
+    public function withFile(string $file): static
+    {
+        $this->file = $file;
+        return $this;
+    }
 }
