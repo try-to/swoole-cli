@@ -6,15 +6,7 @@ use SwooleCli\Extension;
 
 return function (Preprocessor $p) {
 
-    $options = '--enable-tdengine --with-tdengine-dir=/usr/tdengine';
-
-    $p->addExtension(
-        (new Extension('redis'))
-            ->withOptions('--enable-redis')
-            ->withPeclVersion('5.3.7')
-            ->withHomePage('https://github.com/phpredis/phpredis')
-            ->withLicense('https://github.com/phpredis/phpredis/blob/develop/COPYING', Extension::LICENSE_PHP)
-    );
+    $options = '--enable-tdengine --with-tdengine-dir=/usr/local/taos';
 
     $ext = (new Extension('tdengine'))
         ->withOptions($options)

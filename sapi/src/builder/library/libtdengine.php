@@ -11,7 +11,7 @@ return function (Preprocessor $p) {
             ->withManual('https://docs.taosdata.com/get-started/')
             ->withUrl('https://github.com/taosdata/TDengine/archive/refs/tags/ver-3.0.7.1.tar.gz')
             ->withFile('TDengine-ver-3.0.7.1.tar.gz')
-            ->withPrefix('/usr/tdengine/')
+            ->withPrefix('/usr/local/taos/')
             ->withBuildScript(
                 <<<EOF
                 mkdir -p build
