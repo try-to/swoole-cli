@@ -11,10 +11,8 @@ return function (Preprocessor $p) {
     $ext = (new Extension('tdengine'))
         ->withOptions($options)
         ->withLicense('https://github.com/Yurunsoft/php-tdengine/blob/master/LICENSE', Extension::LICENSE_SPEC)
-        ->withHomePage('https://github.com/Yurunsoft/php-tdengine.git')
-        ->withManual('https://wiki.swoole.com/#/')
-        ->withUrl('https://github.com/Yurunsoft/php-tdengine/archive/refs/tags/v1.0.6.tar.gz')
-        ->withFile('tdengine-v1.0.6.tar.gz')
+        ->withHomePage('https://github.com/Yurunsoft/php-tdengine')
+        ->withPeclVersion('1.0.6')
         ->withDependentExtensions('swoole')
         ->withDependentLibraries('libtdengine');
     $p->addExtension($ext);
