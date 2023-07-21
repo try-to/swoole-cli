@@ -6,7 +6,7 @@ use SwooleCli\Extension;
 
 return function (Preprocessor $p) {
 
-    $options = '--enable-tdengine --with-tdengine-dir=/usr/local/taos';
+    $options = '--enable-tdengine --with-tdengine-dir=' . TDENGINE_PREFIX;
 
     $ext = (new Extension('tdengine'))
         ->withOptions($options)
