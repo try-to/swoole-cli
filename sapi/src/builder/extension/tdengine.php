@@ -6,7 +6,7 @@ use SwooleCli\Extension;
 
 return function (Preprocessor $p) {
 
-    $options = '--with-tdengine --with-tdengine-dir=' . TDENGINE_PREFIX;
+    $options = '--enable-tdengine --with-tdengine-dir=/usr/tdengine';
 
     $ext = (new Extension('tdengine'))
         ->withOptions($options)
