@@ -1,4 +1,4 @@
-name: build-windows-ffi
+name: build-windows-swow
 
 on: [ push, pull_request ]
 
