@@ -29,7 +29,7 @@ on:
     push:
 
 jobs:
-  linux-x86_64:
+  build:
     name: PHP ${{ matrix.php-version }}
     runs-on: ubuntu-latest
     strategy:
