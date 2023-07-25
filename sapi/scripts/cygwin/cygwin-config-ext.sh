@@ -20,6 +20,7 @@ IMAGICK_VERSION=3.7.0
 PHP_TDENGINE_VERSION=1.0.6
 PDO_TAOS_VERSION=1.0.3
 SWOOLE_VERSION=4.8.13
+SWOW_VERSION=1.3.1
 
 if [ ! -d pool/ext ]; then
     mkdir -p pool/ext
@@ -72,12 +73,20 @@ fi
 #     mv php-tdengine-${PHP_TDENGINE_VERSION} $ROOT/ext/tdengine
 # fi
 
-if [ ! -d $ROOT/ext/pdo_taos ]; then
-    if [ ! -f pdo_taos-${PDO_TAOS_VERSION}.tgz ]; then
-        wget https://github.com/bearlord/pdo_taos/archive/refs/tags/${PDO_TAOS_VERSION}.tar.gz -O pdo_taos-${PDO_TAOS_VERSION}.tar.gz
+# if [ ! -d $ROOT/ext/pdo_taos ]; then
+#     if [ ! -f pdo_taos-${PDO_TAOS_VERSION}.tgz ]; then
+#         wget https://github.com/bearlord/pdo_taos/archive/refs/tags/${PDO_TAOS_VERSION}.tar.gz -O pdo_taos-${PDO_TAOS_VERSION}.tar.gz
+#     fi
+#     tar zxvf pdo_taos-${PDO_TAOS_VERSION}.tar.gz
+#     mv pdo_taos-${PDO_TAOS_VERSION} $ROOT/ext/pdo_taos
+# fi
+
+if [ ! -d $ROOT/ext/swow ]; then
+    if [ ! -f swow-v${SWOW_VERSION}.tar.gz ]; then
+        wget https://github.com/swow/swow/archive/refs/tags/v${SWOW_VERSION}.tar.gz
     fi
-    tar zxvf pdo_taos-${PDO_TAOS_VERSION}.tar.gz
-    mv pdo_taos-${PDO_TAOS_VERSION} $ROOT/ext/pdo_taos
+    tar zxvf swow-v${SWOW_VERSION}.tar.gz
+    mv swow-${SWOW_VERSION}/ext/ $ROOT/ext/swow
 fi
 
 cd $ROOT
