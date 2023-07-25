@@ -26,6 +26,7 @@ on:
         description: "定制构建选项: 请查看 docs/options.md"
         default: ' '
         type: string
+    push:
 
 jobs:
   linux-x86_64:
