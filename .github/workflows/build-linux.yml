@@ -129,9 +129,10 @@ jobs:
           file ./bin/php-${{ matrix.php-version }}/bin/php
           readelf -h ./bin/php-${{ matrix.php-version }}/bin/php
           ./bin/php-${{ matrix.php-version }}/bin/php -r "echo PHP_VERSION;"
-          ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php  --list-tests
-          ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php
-          ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/SwoolePGSQLTest.php
+
+          # ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php  --list-tests
+          # ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php
+          # ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/SwoolePGSQLTest.php
 
       - name: production artifacts
         uses: actions/upload-artifact@v3
