@@ -1,8 +1,6 @@
 name: build2-linux-x86_64
 
 on:
-  push:
-  pull_request:
   workflow_dispatch:
     inputs:
       build_latest_swoole_or_swow:
