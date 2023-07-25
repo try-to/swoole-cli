@@ -6,7 +6,7 @@ on:
       swoole_or_swow:
         required: true
         description: "定制构建选项: 构建最新版的 swoole 或者 swow （此二者扩展不能同时启用）"
-        default: ' '
+        default: '-swoole +swow'
         type: choice
         options:
         - ' '
