@@ -3,7 +3,7 @@ name: build2-linux-x86_64
 on:
   workflow_dispatch:
     inputs:
-      build_latest_swoole_or_swow:
+      swoole_or_swow:
         required: true
         description: "定制构建选项: 构建最新版的 swoole 或者 swow （此二者扩展不能同时启用）"
         default: ' '
@@ -13,37 +13,30 @@ on:
         - '-swoole +swoole_latest'
         - '-swoole +swow_latest'
         - '-swoole +swow'
-      php_verson:
-        required: true
-        description: "定制构建选项: 指定 PHP 版本(版本号大于8)"
-        default: '--with-php-version=8.2.7'
-        type: choice
-        options:
-        - '--with-php-version=8.0.29'
-        - '--with-php-version=8.1.20'
-        - '--with-php-version=8.2.7'
       build_type:
         required: true
         description: "定制构建选项: 指定构建类型"
-        default: '--with-build-type=release'
+        default: 'release'
         type: choice
         options:
-        - '--with-build-type=release'
-        - '--with-build-type=dev'
+        - 'release'
+        - 'dev'
       build_options:
         required: false
         description: "定制构建选项: 请查看 docs/options.md"
         default: ' '
         type: string
 
-
-env:
-  BUILD_PHP_VERSION: 8.2.4
-
 jobs:
   linux-x86_64:
-    if: 1
+    name: PHP ${{ matrix.php-version }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ["8.2.4"]
+        # php-version: ["8.2", "8.1", "8.0"]
+      max-parallel: 12
     steps:
       - uses: actions/checkout@v3
       - name: Prepare Source Code
@@ -60,7 +53,7 @@ jobs:
           uname -m
           uname -r
 
-          # echo "BUILD_PHP_VERSION=8.2.4" >> "$GITHUB_ENV"
+          # echo "BUILD_PHP_VERSION=${{ matrix.php-version }}" >> "$GITHUB_ENV"
 
           cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
           cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
@@ -92,7 +85,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: docker.io/jingjingxyk/build-swoole-cli:all-dependencies-alpine-3.17-php8-v1.0.0-x86_64-20230614T150918Z
-          options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ env.BUILD_PHP_VERSION }}
+          options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ matrix.php-version }}
           run: |
             set -eux
             # export PATH=/work/bin/runtime:$PATH  # 容器已经内置 php 和 composer 容器
@@ -100,7 +93,7 @@ jobs:
             # composer update --no-dev  --optimize-autoloader
             composer update   --optimize-autoloader
 
-            php prepare.php  +inotify +apcu +ds +xlswriter +ssh2  +pgsql +pdo_pgsql -mongodb --with-swoole-pgsql=1 ${{ inputs.build_type }} ${{ inputs.build_options }} --with-install-library-cached=1
+            php prepare.php  +inotify +apcu +ds +xlswriter +ssh2 +pgsql +pdo_pgsql +mongodb --with-swoole-pgsql=1 --with-build-type=${{ inputs.build_type }} ${{ inputs.swoole_or_swow }} ${{ inputs.build_options }}  --with-install-library-cached=1
 
             chmod a+x make.sh
             head -n 20 make.sh
@@ -118,7 +111,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: docker.io/jingjingxyk/build-swoole-cli:all-dependencies-alpine-3.17-php8-v1.0.0-x86_64-20230614T150918Z
-          options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ env.BUILD_PHP_VERSION }}
+          options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ matrix.php-version }}
           run: |
             bash ./make.sh config
             bash ./make.sh build
@@ -130,24 +123,24 @@ jobs:
           ./php-src/sapi/cli/php -v
           ./php-src/sapi/cli/php -m
           ./php-src/sapi/cli/php --ri swoole
-          ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php -v
-          file ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
-          readelf -h ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
-          ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php -r "echo PHP_VERSION;"
-          ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php  --list-tests
-          ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php
-          ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/SwoolePGSQLTest.php
+          ./bin/php-${{ matrix.php-version }}/bin/php -v
+          file ./bin/php-${{ matrix.php-version }}/bin/php
+          readelf -h ./bin/php-${{ matrix.php-version }}/bin/php
+          ./bin/php-${{ matrix.php-version }}/bin/php -r "echo PHP_VERSION;"
+          ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php  --list-tests
+          ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php
+          ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/SwoolePGSQLTest.php
 
       - name: production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: php-cli-linux-x64-${{ env.BUILD_PHP_VERSION }}
+          name: php-cli-linux-x64-${{ matrix.php-version }}
           retention-days: 7
-          path: ./bin/php-${{ env.BUILD_PHP_VERSION }}/bin/php
+          path: ./bin/php-${{ matrix.php-version }}/bin/php
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            php-cli-v${{ env.BUILD_PHP_VERSION }}-linux-x64.tar.xz
+            php-cli-v${{ matrix.php-version }}-linux-x64.tar.xz

@@ -48,7 +48,7 @@ jobs:
           bash ./sapi/scripts/cygwin/cygwin-config-ext.sh
       - name: Configure
         run: |
-          bash ./sapi/scripts/cygwin/cygwin-config.sh
+          bash ./sapi/scripts/cygwin/cygwin-config-swow.sh
       - name: Build
         run: |
           bash ./sapi/scripts/cygwin/cygwin-build.sh
