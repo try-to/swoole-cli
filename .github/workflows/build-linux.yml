@@ -30,12 +30,13 @@ on:
 
 jobs:
   build:
-    name: PHP ${{ matrix.php-version }}
+    name: PHP ${{ matrix.php-version }} ${{ matrix.arch }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         php-version: ["8.2.4"]
+        arch: ["x86_64"]
         # php-version: ["8.2", "8.1", "8.0"]
       max-parallel: 12
     steps:
