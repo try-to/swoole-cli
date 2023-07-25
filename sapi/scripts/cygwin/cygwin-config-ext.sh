@@ -74,10 +74,10 @@ if [ ! -d $ROOT/ext/swoole ]; then
 fi
 
 if [ ! -d $ROOT/ext/swow ]; then
-  if [ ! -f swow-v${SWOW_VERSION}.tar.gz ]; then
-    wget https://github.com/swow/swow/archive/refs/tags/v${SWOW_VERSION}.tar.gz
+  if [ ! -f swow-${SWOW_VERSION}.tar.gz ]; then
+    wget -O swow-${SWOW_VERSION}.tgz https://github.com/swow/swow/archive/refs/tags/v${SWOW_VERSION}.tar.gz
   fi
-  tar zxvf swow-v${SWOW_VERSION}.tar.gz
+  tar xvf swow-${SWOW_VERSION}.tgz
   mv swow-${SWOW_VERSION}/ext/ $ROOT/ext/swow
 fi
 
