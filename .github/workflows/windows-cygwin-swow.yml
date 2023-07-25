@@ -1,4 +1,4 @@
-name: build2-windows-cygwin
+name: build2-windows-swow
 
 on: [ push ]
 

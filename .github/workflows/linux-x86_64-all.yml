@@ -1,4 +1,4 @@
-name: build-swoole-cli-linux-x86_64-all
+name: build2-linux-x86_64-all
 
 on: [ pull_request ]
 

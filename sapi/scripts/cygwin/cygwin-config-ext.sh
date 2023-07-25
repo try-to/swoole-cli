@@ -19,6 +19,7 @@ MONGODB_VERSION=1.14.2
 YAML_VERSION=2.2.2
 IMAGICK_VERSION=3.7.0
 SWOOLE_VERSION=v5.0.3
+SWOW_VERSION=1.3.1
 
 if [ ! -d pool/ext ]; then
   mkdir -p pool/ext
@@ -70,6 +71,14 @@ if [ ! -d $ROOT/ext/swoole ]; then
   mkdir -p swoole-${SWOOLE_VERSION}
   tar --strip-components=1 -C swoole-${SWOOLE_VERSION} -xf swoole-${SWOOLE_VERSION}.tgz
   mv swoole-${SWOOLE_VERSION} $ROOT/ext/swoole
+fi
+
+if [ ! -d $ROOT/ext/swow ]; then
+  if [ ! -f swow-v${SWOW_VERSION}.tar.gz ]; then
+    wget https://github.com/swow/swow/archive/refs/tags/v${SWOW_VERSION}.tar.gz
+  fi
+  tar zxvf swow-v${SWOW_VERSION}.tar.gz
+  mv swow-${SWOW_VERSION}/ext/ $ROOT/ext/swow
 fi
 
 cd $ROOT
