@@ -7,7 +7,8 @@ return function (Preprocessor $p) {
     $p->addExtension(
         (new Extension('ffi'))
             ->withHomePage('https://www.php.net/ffi')
-            ->withOptions('--with-ffi')
+            ->withLicense('http://github.com/libffi/libffi/blob/master/LICENSE', Extension::LICENSE_MIT)
+            ->withOptions('--with-ffi=' . LIBFFI_PREFIX)
             ->withDependentLibraries('libffi')
     );
 };
