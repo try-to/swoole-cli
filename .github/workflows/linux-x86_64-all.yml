@@ -1,6 +1,7 @@
 name: build2-linux-x86_64-all
 
-on: [ pull_request ]
+on:
+  workflow_dispatch:
 
 jobs:
   linux-x86_64:

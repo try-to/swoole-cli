@@ -54,9 +54,11 @@ define("LIBUNISTRING_PREFIX", $p->getGlobalPrefix() . '/libunistring');
 
 define("PGSQL_PREFIX", $p->getGlobalPrefix() . '/pgsql');
 
-define("UNIX_ODBC_PREFIX", $p->getGlobalPrefix() . '/unixODBC');
+define("UNIX_ODBC_PREFIX", $p->getGlobalPrefix() . '/unixODBC'); 
 define("ZOOKEEPER_PREFIX", $p->getGlobalPrefix() . '/zookeeper');
 define("LIBEVENT_PREFIX", $p->getGlobalPrefix() . '/libevent');
 
 define("SNAPPY_PREFIX", $p->getGlobalPrefix() . '/snappy');
 define("LIBSASL_PREFIX", $p->getGlobalPrefix() . '/sasl');
+define("MONGODB_C_DRIVER_PREFIX", $p->getGlobalPrefix() . '/mongo_c_driver');
+define("LIBBSON_PREFIX", $p->getGlobalPrefix() . '/libbson');

@@ -13,6 +13,15 @@ on:
         - '-swoole +swoole_latest'
         - '-swoole +swow_latest'
         - '-swoole +swow'
+      php_verson:
+        required: true
+        description: "定制构建选项: 指定 PHP 版本(版本号大于8)"
+        default: 8.1.20
+        type: choice
+        options:
+          - 8.0.29
+          - 8.1.20
+          - 8.2.7
       build_type:
         required: true
         description: "定制构建选项: 指定构建类型"
@@ -30,15 +39,8 @@ on:
 
 jobs:
   build:
-    name: PHP ${{ matrix.php-version }} ${{ matrix.arch }}
+    name: PHP ${{ inputs.php_verson }}
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        php-version: ["8.2.4"]
-        arch: ["x86_64"]
-        # php-version: ["8.2", "8.1", "8.0"]
-      max-parallel: 12
     steps:
       - uses: actions/checkout@v3
       - name: Prepare Source Code
@@ -55,7 +57,7 @@ jobs:
           uname -m
           uname -r
 
-          # echo "BUILD_PHP_VERSION=${{ matrix.php-version }}" >> "$GITHUB_ENV"
+          # echo "BUILD_PHP_VERSION=${{ inputs.php_verson }}" >> "$GITHUB_ENV"
 
           cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c
           cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
@@ -87,7 +89,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: docker.io/jingjingxyk/build-swoole-cli:all-dependencies-alpine-3.17-php8-v1.0.0-x86_64-20230614T150918Z
-          options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ matrix.php-version }}
+          options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ inputs.php_verson }}
           run: |
             set -eux
             # export PATH=/work/bin/runtime:$PATH  # 容器已经内置 php 和 composer 容器
@@ -113,7 +115,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: docker.io/jingjingxyk/build-swoole-cli:all-dependencies-alpine-3.17-php8-v1.0.0-x86_64-20230614T150918Z
-          options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ matrix.php-version }}
+          options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ inputs.php_verson }}
           run: |
             bash ./make.sh config
             bash ./make.sh build
@@ -125,25 +127,25 @@ jobs:
           ./php-src/sapi/cli/php -v
           ./php-src/sapi/cli/php -m
           # ./php-src/sapi/cli/php --ri swoole
-          ./bin/php-${{ matrix.php-version }}/bin/php -v
-          file ./bin/php-${{ matrix.php-version }}/bin/php
-          readelf -h ./bin/php-${{ matrix.php-version }}/bin/php
-          ./bin/php-${{ matrix.php-version }}/bin/php -r "echo PHP_VERSION;"
+          ./bin/php-${{ inputs.php_verson }}/bin/php -v
+          file ./bin/php-${{ inputs.php_verson }}/bin/php
+          readelf -h ./bin/php-${{ inputs.php_verson }}/bin/php
+          ./bin/php-${{ inputs.php_verson }}/bin/php -r "echo PHP_VERSION;"
 
-          # ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php  --list-tests
-          # ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php
-          # ./bin/php-${{ matrix.php-version }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/SwoolePGSQLTest.php
+          # ./bin/php-${{ inputs.php_verson }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php  --list-tests
+          # ./bin/php-${{ inputs.php_verson }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php
+          # ./bin/php-${{ inputs.php_verson }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/SwoolePGSQLTest.php
 
       - name: production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: php-cli-linux-x64-${{ matrix.php-version }}
+          name: php-cli-linux-x64-${{ inputs.php_verson }}
           retention-days: 7
-          path: ./bin/php-${{ matrix.php-version }}/bin/php
+          path: ./bin/php-${{ inputs.php_verson }}/bin/php
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            php-cli-v${{ matrix.php-version }}-linux-x64.tar.xz
+            php-cli-v${{ inputs.php_verson }}-linux-x64.tar.xz

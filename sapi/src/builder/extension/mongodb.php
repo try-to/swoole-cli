@@ -30,14 +30,20 @@ return function (Preprocessor $p) {
     $options .= ' --with-mongodb-sasl=no ';
     $options .= ' --with-mongodb-icu=yes ';
 
+    $options .= ' --with-mongodb-snappy=no '; # v1.16 add parameter  https://github.com/mongodb/mongo-php-driver/issues/1427
+    $options .= ' --with-mongodb-zlib=yes ';  # v1.16 add parameter
+    $options .= ' --with-mongodb-zstd=yes ';  # v1.16 add parameter
+    $options .= ' --with-mongodb-sasl=no ';   # v1.16 add parameter
+
     $ext = new Extension('mongodb');
 
     $ext->withHomePage('https://www.php.net/mongodb')
         ->withHomePage('https://www.mongodb.com/docs/drivers/php/')
         ->withOptions($options)
-        ->withPeclVersion('1.15.3');
+        ->withPeclVersion('1.16.1')
+        ->withDependentExtensions('openssl');
 
-    $depends = ['icu', 'openssl', 'zlib', 'libzstd'];
+    $depends = ['icu', 'openssl', 'zlib', 'libzstd', 'bison']; // ,'mongo_c_driver','libbson'
 
     //$depends[] = 'libsasl';
     //$depends[] = 'snappy';
@@ -45,4 +51,18 @@ return function (Preprocessor $p) {
     call_user_func_array([$ext, 'withDependentLibraries'], $depends);
 
     $p->addExtension($ext);
+
+    $p->setExtHook('mongodb', function (Preprocessor $p) {
+
+        $workdir = $p->getPhpSrcDir();
+        # bug https://github.com/mongodb/mongo-c-driver/blob/6b7caf9da30eeae09c8eb0c539ebacbb31b9e520/src/libbson/src/bson/bson-error.c#L113
+        $cmd = <<<EOF
+                cd {$workdir}
+                # sed -i.backup "497c  "  ext/mongodb/config.m4
+                sed -i.backup "113c  "  ext/mongodb/src/libmongoc/src/libbson/src/bson/bson-error.c
+                sed -i.backup "113c  "  ext/mongodb/src/libmongoc/src/libbson/src/bson/bson-error.c
+EOF;
+
+        return $cmd;
+    });
 };
