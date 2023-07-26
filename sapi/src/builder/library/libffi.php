@@ -22,7 +22,7 @@ return function (Preprocessor $p) {
 EOF
             )
             ->withPkgName('libffi')
-            ->withLdflags('-L/usr/libffi/lib/')
-            ->withBinPath('/usr/libffi/bin/')
+            ->withLdflags('-L' . $libffi_prefix . '/lib/')
+            ->withBinPath($libffi_prefix . '/bin/')
     );
 };
