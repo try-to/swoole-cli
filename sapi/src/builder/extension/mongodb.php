@@ -29,6 +29,7 @@ return function (Preprocessor $p) {
     $options .= ' --with-mongodb-ssl=openssl ';
     $options .= ' --with-mongodb-sasl=no ';
     $options .= ' --with-mongodb-icu=yes ';
+    $options .= ' --with-mongodb-client-side-encryption=no ';
 
     $options .= ' --with-mongodb-snappy=no '; # v1.16 add parameter  https://github.com/mongodb/mongo-php-driver/issues/1427
     $options .= ' --with-mongodb-zlib=yes ';  # v1.16 add parameter
