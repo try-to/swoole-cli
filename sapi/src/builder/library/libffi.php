@@ -15,13 +15,12 @@ return function (Preprocessor $p) {
             ->withFile('libffi-3.4.4.tar.gz')
             ->withPrefix($libffi_prefix)
             ->withConfigure(
-                '
-            ./configure --help ;
-            ./configure \
-            --prefix={$libffi_prefix} \
-            --enable-shared=no \
-            --enable-static=yes 
-            '
+            <<<EOF
+            ./configure --help
+            ./configure --prefix={$libffi_prefix} \
+            --enable-static=yes \
+            --enable-shared=no
+EOF
             )
             ->withPkgName('libffi')
             ->withPkgConfig($libffi_prefix . '/lib/pkgconfig')
