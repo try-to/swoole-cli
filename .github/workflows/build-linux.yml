@@ -124,31 +124,28 @@ jobs:
 
       - name: Show Build Result
         run: |
-          let currSw = "${{ inputs.swoole_or_swow }}";
-          let currOp = "${{ inputs.build_options }}";
-          let currIsRc = (currSw.indexOf("+swow") === -1) || (currOp.indexOf("+swow") === -1);
-
-          console.log("Is Swow: '" + currIsRc + "'");
+          currSw=${{ inputs.swoole_or_swow }}
+          currOp=${{ inputs.build_options }}
 
           ./php-src/sapi/cli/php -v
           ./php-src/sapi/cli/php -m
 
-          if (currIsRc) {
+          if [[ $currSw =~ *"+swow"* && $currOp =~ *"+swow"*  ]]; then
           ./php-src/sapi/cli/php --ri swoole
-          } else {
+          else
           ./php-src/sapi/cli/php --ri swow
-          }
+          fi
 
           ./bin/php-${{ inputs.php_verson }}/bin/php -v
           file ./bin/php-${{ inputs.php_verson }}/bin/php
           readelf -h ./bin/php-${{ inputs.php_verson }}/bin/php
           ./bin/php-${{ inputs.php_verson }}/bin/php -r "echo PHP_VERSION;"
 
-          if (currIsRc) {
+          if [[ $currSw =~ *"+swow"* && $currOp =~ *"+swow"*  ]]; then
           ./bin/php-${{ inputs.php_verson }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php  --list-tests
           ./bin/php-${{ inputs.php_verson }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/MainTest.php
           ./bin/php-${{ inputs.php_verson }}/bin/php ./vendor/bin/phpunit ./sapi/src/UnitTest/SwoolePGSQLTest.php
-          }
+          fi
 
       - name: production artifacts
         uses: actions/upload-artifact@v3
