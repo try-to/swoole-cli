@@ -1,6 +1,7 @@
 name: build-swoole-cli-windows-cygwin
 
-on: []
+on:
+  workflow_dispatch:
 
 jobs:
   windows-cygwin:
