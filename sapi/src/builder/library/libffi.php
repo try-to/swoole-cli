@@ -12,7 +12,15 @@ return function (Preprocessor $p) {
             ->withUrl('https://github.com/libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz')
             ->withFile('libffi-3.4.4.tar.gz')
             ->withPrefix($libffi_prefix)
-            ->withConfigure('./configure --prefix=' . $libffi_prefix . ' --enable_static=yes --enable_shared=no')
+            ->withConfigure(
+                <<<EOF
+                ./configure --help
+                ./configure \
+                --prefix={$libffi_prefix} \
+                --enable-static=yes \
+                --enable-shared=no \
+EOF
+            )
             ->withBinPath($libffi_prefix . '/bin/')
     );
 
