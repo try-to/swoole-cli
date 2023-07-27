@@ -26,7 +26,7 @@ EOF
             ->withLdflags('-L' . $libffi_prefix . '/lib/')
             ->withBinPath($libffi_prefix . '/bin/')
     );
-    $p->withVariable('CPPFLAGS', '$CPPFLAGS -I' . $libffi_prefix . '/include');
-    $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
+    // $p->withVariable('CPPFLAGS', '$CPPFLAGS -I' . $libffi_prefix . '/include');
+    // $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
     // $p->withVariable('LIBS', '$LIBS -lffi');
 };
