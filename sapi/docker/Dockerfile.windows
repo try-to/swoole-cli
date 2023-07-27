@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/windows:ltsc2019
+
+# FROM mcr.microsoft.com/windows/server:ltsc2022
+# FROM mcr.microsoft.com/windows/servercore:ltsc2022
+
+RUN ["powershell", "Set-ExecutionPolicy", "Bypass", "-Scope", "Process", "-Force;"]
+RUN ["powershell", "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"]
+RUN choco install git.install -yf
+RUN SETX /M path "%PATH%;C:\Program Files\Git\bin"
+
+
+WORKDIR /work

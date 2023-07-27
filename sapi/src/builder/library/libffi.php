@@ -19,6 +19,8 @@ return function (Preprocessor $p) {
                 --prefix={$libffi_prefix} \
                 --enable-static=yes \
                 --enable-shared=no \
+                --libdir={$libffi_prefix}/lib \
+                --includedir={$libffi_prefix}/include
 EOF
             )
             ->withPkgName('libffi')
@@ -26,4 +28,6 @@ EOF
             ->withLdflags('-L' . $libffi_prefix . '/lib/')
             ->withBinPath($libffi_prefix . '/bin/')
     );
+    $p->withVariable('CPPFLAGS', '$CPPFLAGS -I' . $libffi_prefix . '/include');
+    $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
 };
