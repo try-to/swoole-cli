@@ -14,6 +14,7 @@ return function (Preprocessor $p) {
             ->withPrefix($libffi_prefix)
             ->withConfigure(
                 <<<EOF
+                mkdir -p {$libffi_prefix}/lib/pkgconfig
                 ./configure --help
                 ./configure \
                 --prefix={$libffi_prefix} \
@@ -30,4 +31,5 @@ EOF
     );
     $p->withVariable('CPPFLAGS', '$CPPFLAGS -I' . $libffi_prefix . '/include');
     $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
+    $p->withVariable('LIBS', '$LIBS -lffi');
 };
