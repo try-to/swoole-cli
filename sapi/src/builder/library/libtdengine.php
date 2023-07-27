@@ -17,7 +17,7 @@ return function (Preprocessor $p) {
                 <<<EOF
                 mkdir -p build
                 cd build
-                PACKAGES="liblz4 zlib libssl openssl "
+                PACKAGES=" zlib libssl openssl "
                 CPPFLAGS="$(pkg-config  --cflags-only-I --static \$PACKAGES ) " \
                 LDFLAGS="$(pkg-config   --libs-only-L   --static \$PACKAGES )  " \
                 LIBS="$(pkg-config      --libs-only-l   --static \$PACKAGES )  "
@@ -39,7 +39,6 @@ EOF
             )
             ->withDependentLibraries(
                 'zlib',
-                'liblz4',
                 'openssl'
             )
     );
