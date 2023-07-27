@@ -14,6 +14,7 @@ return function (Preprocessor $p) {
             ->withPrefix($libffi_prefix)
             ->withConfigure(
                 <<<EOF
+                ./autogen.sh
                 ./configure --help
                 ./configure \
                 --prefix={$libffi_prefix} \
