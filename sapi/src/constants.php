@@ -63,3 +63,4 @@ define("LIBSASL_PREFIX", $p->getGlobalPrefix() . '/sasl');
 define("MONGODB_C_DRIVER_PREFIX", $p->getGlobalPrefix() . '/mongo_c_driver');
 define("LIBBSON_PREFIX", $p->getGlobalPrefix() . '/libbson');
 define("LIBFFI_PREFIX", $p->getGlobalPrefix() . '/libffi');
+define("TDENGINE_PREFIX", $p->getGlobalPrefix() . '/tdengine');
