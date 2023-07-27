@@ -6,7 +6,8 @@ use SwooleCli\Extension;
 
 return function (Preprocessor $p) {
 
-    $options = '--with-tdengine --with-tdengine-dir=' . TDENGINE_PREFIX;
+    // $options = '--with-tdengine --with-tdengine-dir=' . TDENGINE_PREFIX;
+    $options = '--with-tdengine --with-tdengine-dir=/usr/local/taos';
 
     $ext = (new Extension('tdengine'))
         ->withOptions($options)
@@ -15,7 +16,7 @@ return function (Preprocessor $p) {
         ->withManual('https://wiki.swoole.com/#/')
         ->withUrl('https://github.com/Yurunsoft/php-tdengine/archive/refs/tags/v1.0.6.tar.gz')
         ->withFile('tdengine-v1.0.6.tar.gz')
-        ->withDependentExtensions('swoole')
+        // ->withDependentExtensions('swoole')
         ->withDependentLibraries('libtdengine');
     $p->addExtension($ext);
 };
