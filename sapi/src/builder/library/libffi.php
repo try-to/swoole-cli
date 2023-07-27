@@ -14,26 +14,12 @@ return function (Preprocessor $p) {
             ->withPrefix($libffi_prefix)
             ->withConfigure(
                 <<<EOF
-                ./autogen.sh
                 ./configure --help
                 ./configure \
                 --prefix={$libffi_prefix} \
+                --disable-docs \
                 --enable-static=yes \
                 --enable-shared=no
-
-
-                mkdir -p build
-                cd build
-                cmake .. \
-                -Wsign-compare \
-                -DCMAKE_INSTALL_PREFIX={$libffi_prefix} \
-                -DCMAKE_INSTALL_LIBDIR={$libffi_prefix}/lib \
-                -DCMAKE_INSTALL_INCLUDEDIR={$libffi_prefix}/include \
-                -DCMAKE_BUILD_TYPE=Release  \
-                -DBUILD_SHARED_LIBS=OFF  \
-                -DBUILD_STATIC_LIBS=ON \
-                -DSNAPPY_BUILD_TESTS=OFF \
-                -DSNAPPY_BUILD_BENCHMARKS=OFF
 EOF
             )
             ->withPkgName('libffi')
@@ -41,7 +27,8 @@ EOF
             ->withLdflags('-L' . $libffi_prefix . '/lib/')
             ->withBinPath($libffi_prefix . '/bin/')
     );
-    // $p->withVariable('CPPFLAGS', '$CPPFLAGS -I' . $libffi_prefix . '/include');
-    // $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
+    $p->withVariable('CPPFLAGS', '$CPPFLAGS -DFFI_BUILDING_DLL -I' . $libffi_prefix . '/include');
+    $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
+    $p->withVariable('CPP', '$CPP cl -nologo -EP');
     // $p->withVariable('LIBS', '$LIBS -lffi');
 };
