@@ -62,7 +62,14 @@ define("SNAPPY_PREFIX", $p->getGlobalPrefix() . '/snappy');
 define("LIBSASL_PREFIX", $p->getGlobalPrefix() . '/sasl');
 define("MONGODB_C_DRIVER_PREFIX", $p->getGlobalPrefix() . '/mongo_c_driver');
 define("LIBBSON_PREFIX", $p->getGlobalPrefix() . '/libbson');
-// define("LIBFFI_PREFIX", $p->getGlobalPrefix() . '/libffi');
-define("LIBFFI_PREFIX", '/usr/libffi');
+define("LIBFFI_PREFIX", $p->getGlobalPrefix() . '/libffi');
+
 
 define("TDENGINE_PREFIX", $p->getGlobalPrefix() . '/tdengine');
+define("ROCKSDB_PREFIX", $p->getGlobalPrefix() . '/rocksdb');
+define("GEOS_PREFIX", $p->getGlobalPrefix() . '/geos');
+define("LIBUV_PREFIX", $p->getGlobalPrefix() . '/libuv');
+define("CJSON_PREFIX", $p->getGlobalPrefix() . '/cjson');
+define("GFLAGS_PREFIX", $p->getGlobalPrefix() . '/gflags');
+define("LIBURING_PREFIX", $p->getGlobalPrefix() . '/liburing');
+define("JANSSON_PREFIX", $p->getGlobalPrefix() . '/jansson');
