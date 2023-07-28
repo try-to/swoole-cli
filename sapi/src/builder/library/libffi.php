@@ -23,15 +23,9 @@ return function (Preprocessor $p) {
                 --enable-shared=no
 EOF
             )
-            ->withScriptBeforeInstall(
-                '
-                ls ' . $libffi_prefix . '/lib/pkgconfig/* ;
-                ln -sf ' . $libffi_prefix . '/lib/pkgconfig/libffi*.pc ' . $libffi_prefix . '/lib/pkgconfig/libffi.pc ;
-                '
-            )
             ->withPkgName('libffi')
-            ->withPkgConfig($libffi_prefix . '/lib/pkgconfig')
-            ->withLdflags('-L' . $libffi_prefix . '/lib/')
+            // ->withPkgConfig($libffi_prefix . '/lib/pkgconfig')
+            // ->withLdflags('-L' . $libffi_prefix . '/lib/')
             ->withBinPath($libffi_prefix . '/bin/')
     );
     // $p->withVariable('CPPFLAGS', '$CPPFLAGS -DFFI_BUILDING_DLL -I' . $libffi_prefix . '/include');
