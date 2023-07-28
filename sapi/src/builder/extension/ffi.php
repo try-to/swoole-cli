@@ -9,6 +9,5 @@ return function (Preprocessor $p) {
             ->withHomePage('https://www.php.net/ffi')
             ->withLicense('http://github.com/libffi/libffi/blob/master/LICENSE', Extension::LICENSE_MIT)
             ->withOptions('--with-ffi=' . LIBFFI_PREFIX)
-            ->withDependentLibraries('libffi')
     );
 };
