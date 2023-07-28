@@ -21,6 +21,8 @@ return function (Preprocessor $p) {
                 --enable-static=yes \
                 --enable-shared=no
 EOF
+            )->withScriptBeforeInstall(
+                'tree ' . $libffi_prefix
             )
             ->withPkgName('libffi')
             ->withBinPath($libffi_prefix . '/bin/')
