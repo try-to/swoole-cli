@@ -14,18 +14,21 @@ return function (Preprocessor $p) {
             ->withPrefix($libffi_prefix)
             ->withConfigure(
                 <<<EOF
-                ./autogen.sh
-                ./configure --help
-                ./configure \
+                test -d build && rm -rf build
+                mkdir -p build
+                cd build
+
+                ../configure --help
+                ../configure \
                 --prefix={$libffi_prefix} \
                 --disable-docs \
                 --enable-static=yes \
                 --enable-shared=no
+
+                make && make install
 EOF
             )
             ->withPkgName('libffi')
-            // ->withPkgConfig($libffi_prefix . '/lib/pkgconfig')
-            // ->withLdflags('-L' . $libffi_prefix . '/lib/')
             ->withBinPath($libffi_prefix . '/bin/')
     );
     // $p->withVariable('CPPFLAGS', '$CPPFLAGS -DFFI_BUILDING_DLL -I' . $libffi_prefix . '/include');
