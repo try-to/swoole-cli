@@ -25,7 +25,7 @@ EOF
             )
             ->withScriptBeforeInstall(
                 '
-                ls ' . $libffi_prefix . '/lib/pkgconfig/formw.pc ;
+                ls ' . $libffi_prefix . '/lib/pkgconfig/* ;
                 ln -sf ' . $libffi_prefix . '/lib/pkgconfig/libffi*.pc ' . $libffi_prefix . '/lib/pkgconfig/libffi.pc ;
                 '
             )
