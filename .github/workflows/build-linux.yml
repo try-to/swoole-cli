@@ -106,6 +106,7 @@ jobs:
           options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ inputs.php_verson }}
           run: |
             apk list
+            apk add libffi-dev
             bash sapi/quickstart/mark-install-library-cached.sh
             bash ./make.sh all-library
 
