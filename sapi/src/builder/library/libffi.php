@@ -22,18 +22,8 @@ return function (Preprocessor $p) {
                 --enable-static=yes \
                 --enable-shared=no
 
-                mkdir -p build
-                cd build
-                cmake .. \
-                -Wsign-compare \
-                -DCMAKE_INSTALL_PREFIX={$libffi_prefix} \
-                -DCMAKE_INSTALL_LIBDIR={$libffi_prefix}/lib \
-                -DCMAKE_INSTALL_INCLUDEDIR={$libffi_prefix}/include \
-                -DCMAKE_BUILD_TYPE=Release  \
-                -DBUILD_SHARED_LIBS=OFF  \
-                -DBUILD_STATIC_LIBS=ON \
-                -DSNAPPY_BUILD_TESTS=OFF \
-                -DSNAPPY_BUILD_BENCHMARKS=OFF
+                ls $libffi_prefix . '/lib'
+                tree $libffi_prefix
 EOF
             )
             ->withPkgName('libffi')
