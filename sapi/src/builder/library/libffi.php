@@ -14,18 +14,12 @@ return function (Preprocessor $p) {
             ->withPrefix($libffi_prefix)
             ->withConfigure(
                 <<<EOF
-                test -d build && rm -rf build
-                mkdir -p build
-                cd build
-
-                ../configure --help
-                ../configure \
+                ./configure --help
+                ./configure \
                 --prefix={$libffi_prefix} \
                 --disable-docs \
                 --enable-static=yes \
                 --enable-shared=no
-
-                make && make install
 EOF
             )
             ->withPkgName('libffi')
