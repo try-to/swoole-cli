@@ -21,10 +21,10 @@ return function (Preprocessor $p) {
                 --disable-docs \
                 --enable-static=yes \
                 --enable-shared=no
-
-                ls $libffi_prefix . '/lib'
-                tree $libffi_prefix
 EOF
+            )
+            ->withScriptBeforeInstall(
+                "ls $libffi_prefix . '/lib'"
             )
             ->withPkgName('libffi')
             // ->withPkgConfig($libffi_prefix . '/lib/pkgconfig')
