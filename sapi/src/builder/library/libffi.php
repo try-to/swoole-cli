@@ -31,8 +31,7 @@ EOF
             ->withPkgName('libffi')
             ->withBinPath($libffi_prefix . '/bin/')
     );
-    // $p->withVariable('CPPFLAGS', '$CPPFLAGS -DFFI_BUILDING_DLL -I' . $libffi_prefix . '/include');
-    // $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
-    // $p->withVariable('CPP', '$CPP cl -nologo -EP');
-    // $p->withVariable('LIBS', '$LIBS -lffi');
+    $p->withVariable('CPPFLAGS', '$CPPFLAGS -I' . $libffi_prefix . '/include');
+    $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
+    $p->withVariable('LIBS', '$LIBS -lffi');
 };
