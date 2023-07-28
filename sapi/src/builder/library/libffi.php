@@ -24,15 +24,18 @@ return function (Preprocessor $p) {
 EOF
             )
             ->withScriptBeforeInstall(
-                "ls $libffi_prefix . '/lib'"
+                '
+                ls ' . $libffi_prefix . '/lib/pkgconfig/formw.pc ;
+                ln -sf ' . $libffi_prefix . '/lib/pkgconfig/libffi*.pc ' . $libffi_prefix . '/lib/pkgconfig/libffi.pc ;
+                '
             )
             ->withPkgName('libffi')
-            // ->withPkgConfig($libffi_prefix . '/lib/pkgconfig')
-            // ->withLdflags('-L' . $libffi_prefix . '/lib/')
+            ->withPkgConfig($libffi_prefix . '/lib/pkgconfig')
+            ->withLdflags('-L' . $libffi_prefix . '/lib/')
             ->withBinPath($libffi_prefix . '/bin/')
     );
-    $p->withVariable('CPPFLAGS', '$CPPFLAGS -DFFI_BUILDING_DLL -I' . $libffi_prefix . '/include');
-    $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
+    // $p->withVariable('CPPFLAGS', '$CPPFLAGS -DFFI_BUILDING_DLL -I' . $libffi_prefix . '/include');
+    // $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
     // $p->withVariable('CPP', '$CPP cl -nologo -EP');
-    $p->withVariable('LIBS', '$LIBS -lffi');
+    // $p->withVariable('LIBS', '$LIBS -lffi');
 };
