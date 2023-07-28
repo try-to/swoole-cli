@@ -105,6 +105,7 @@ jobs:
           image: docker.io/jingjingxyk/build-swoole-cli:all-dependencies-alpine-3.17-php8-v1.0.0-x86_64-20230614T150918Z
           options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ inputs.php_verson }}
           run: |
+            apk list
             bash sapi/quickstart/mark-install-library-cached.sh
             bash ./make.sh all-library
 
