@@ -14,6 +14,12 @@ return function (Preprocessor $p) {
             ->withPrefix($libffi_prefix)
             ->withConfigure(
                 <<<EOF
+                if [ ! -d {$libffi_prefix}/lib ]; then
+                    mkdir -p {$libffi_prefix}/lib
+                fi
+                if [ ! -d {$libffi_prefix}/include ]; then
+                    mkdir -p {$libffi_prefix}/include
+                fi
                 ./configure --help
                 ./configure \
                 --prefix={$libffi_prefix} \
@@ -21,13 +27,11 @@ return function (Preprocessor $p) {
                 --enable-static=yes \
                 --enable-shared=no
 EOF
-            )->withScriptBeforeInstall(
-                'tree ' . $libffi_prefix
             )
             ->withPkgName('libffi')
             ->withBinPath($libffi_prefix . '/bin/')
     );
-    $p->withVariable('CPPFLAGS', '$CPPFLAGS -I' . $libffi_prefix . '/include');
-    $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
-    $p->withVariable('LIBS', '$LIBS -lffi');
+    // $p->withVariable('CPPFLAGS', '$CPPFLAGS -I' . $libffi_prefix . '/include');
+    // $p->withVariable('LDFLAGS', '$LDFLAGS -L' . $libffi_prefix . '/lib');
+    // $p->withVariable('LIBS', '$LIBS -lffi');
 };
