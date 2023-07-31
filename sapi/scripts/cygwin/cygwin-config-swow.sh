@@ -25,7 +25,7 @@ cd ${__PROJECT__}/php-src/
 ./buildconf --force
 test -f Makefile && make clean
 
-./configure --prefix=/usr --disable-all --disable-fiber-asm --enable-swow
+./configure --prefix=/usr --disable-all --disable-fiber-asm --with-curl --enable-swow
 
 # ./configure --prefix=/usr --disable-all \
 #   --disable-fiber-asm \
