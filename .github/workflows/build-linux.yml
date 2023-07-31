@@ -98,7 +98,7 @@ jobs:
 
             # php prepare.php -bcmath -bz2 -ctype -curl -exif -fileinfo -filter -gd -gmp -iconv -imagick -intl -mbstring -mongodb -mysqli -mysqlnd -opcache -openssl -pcntl -pdo -pdo_mysql -pdo_sqlite -phar -posix -readline -redis -session -soap -sockets -sodium -sqlite3 -swoole -tokenizer -xml -xsl -yaml -zip -zlib +ffi
 
-            php prepare.php +ffi --with-override-default-enabled-ext=1 --with-build-type=dev
+            php prepare.php +ffi +swow --with-override-default-enabled-ext=1 --with-build-type=dev
 
             chmod a+x make.sh
             head -n 20 make.sh
@@ -118,6 +118,8 @@ jobs:
           image: docker.io/jingjingxyk/build-swoole-cli:all-dependencies-alpine-3.17-php8-v1.0.0-x86_64-20230614T150918Z
           options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ inputs.php_verson }}
           run: |
+            apk add libffi-dev
+
             bash ./make.sh config
             bash ./make.sh build
 
