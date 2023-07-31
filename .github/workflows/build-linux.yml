@@ -89,7 +89,6 @@ jobs:
           options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ inputs.php_verson }}
           run: |
             set -eux
-            apk add tree libffi-dev
             # export PATH=/work/bin/runtime:$PATH  # 容器已经内置 php 和 composer 容器
 
             # composer update --no-dev  --optimize-autoloader
@@ -110,7 +109,6 @@ jobs:
           image: docker.io/jingjingxyk/build-swoole-cli:all-dependencies-alpine-3.17-php8-v1.0.0-x86_64-20230614T150918Z
           options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ inputs.php_verson }}
           run: |
-            apk add tree libffi-dev
             bash sapi/quickstart/mark-install-library-cached.sh
             bash ./make.sh all-library
 
