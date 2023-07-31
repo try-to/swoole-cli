@@ -117,6 +117,8 @@ jobs:
           options: -v ${{ github.workspace }}:/work -w /work -e BUILD_PHP_VERSION=${{ inputs.php_verson }}
           run: |
             apk add tree
+            apk info -a libffi
+            apk add libffi=3.4.4
 
             bash ./make.sh config
             bash ./make.sh build
