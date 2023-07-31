@@ -28,6 +28,19 @@ return function (Preprocessor $p) {
                 --enable-shared=no
 EOF
             )
+            ->withScriptAfterInstall(
+                <<<EOF
+                if grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
+                    yum install -y libffi-devel
+                elif grep -Eqi "Alpine" /etc/issue || grep -Eq "Alpine" /etc/*-release; then
+                    apk add libffi-dev
+                elif grep -Eqi "Ubuntu" /etc/issue || grep -Eq "Ubuntu" /etc/*-release; then
+                    apt-get install -y libffi-dev
+                elif grep -Eqi "Debian" /etc/issue || grep -Eq "Debian" /etc/*-release; then
+                    apt-get install -y libffi-dev
+                fi
+EOF
+            )
             ->withPkgName('libffi')
             ->withBinPath($libffi_prefix . '/bin/')
     );
