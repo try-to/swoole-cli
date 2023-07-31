@@ -22,12 +22,10 @@ cd ${__PROJECT__}/php-src/
 # export CFLAGS=""
 # export LDFLAGS="-L/usr/lib"
 
-php prepare.php -bcmath -bz2 -ctype -curl -exif -fileinfo -filter -gd -gmp -iconv -imagick -intl -mbstring -mongodb -mysqli -mysqlnd -opcache -openssl -pcntl -pdo -pdo_mysql -pdo_sqlite -phar -posix -readline -redis -session -soap -sockets -sodium -sqlite3 -swoole -tokenizer -xml -xsl -yaml -zip -zlib
-
 ./buildconf --force
 test -f Makefile && make clean
 
-./configure --prefix=/usr --disable-all --enable-swow
+./configure --prefix=/usr --disable-all --disable-fiber-asm --enable-swow
 
 # ./configure --prefix=/usr --disable-all \
 #   --disable-fiber-asm \
