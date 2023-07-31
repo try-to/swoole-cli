@@ -96,7 +96,9 @@ jobs:
 
             #php prepare.php  +inotify +apcu +ds +xlswriter +ssh2 +pgsql +pdo_pgsql -mongodb --with-swoole-pgsql=1 ${{ inputs.swoole_or_swow }} ${{ inputs.build_options }} --with-install-library-cached=1 --with-build-type=${{ inputs.build_type }} --with-php-version=${{ inputs.php_verson }}
 
-            php prepare.php -bcmath -bz2 -ctype -curl -exif -fileinfo -filter -gd -gmp -iconv -imagick -intl -mbstring -mongodb -mysqli -mysqlnd -opcache -openssl -pcntl -pdo -pdo_mysql -pdo_sqlite -phar -posix -readline -redis -session -soap -sockets -sodium -sqlite3 -swoole -tokenizer -xml -xsl -yaml -zip -zlib +ffi
+            # php prepare.php -bcmath -bz2 -ctype -curl -exif -fileinfo -filter -gd -gmp -iconv -imagick -intl -mbstring -mongodb -mysqli -mysqlnd -opcache -openssl -pcntl -pdo -pdo_mysql -pdo_sqlite -phar -posix -readline -redis -session -soap -sockets -sodium -sqlite3 -swoole -tokenizer -xml -xsl -yaml -zip -zlib +ffi
+
+            php prepare.php +ffi --with-override-default-enabled-ext=1 --with-build-type=dev
 
             chmod a+x make.sh
             head -n 20 make.sh
