@@ -28,7 +28,7 @@ return function (Preprocessor $p) {
                 --enable-shared=no
 EOF
             )
-            ->withScriptAfterInstall(
+            ->withScriptBeforeInstall(
                 <<<EOF
                 if grep -Eqi "CentOS" /etc/issue || grep -Eq "CentOS" /etc/*-release; then
                     yum install -y libffi-devel
