@@ -1,15 +1,20 @@
-name: build2-windows-cygwin
+name: windows-swoole
 
 on:
   workflow_dispatch:
 
-env:
-  BUILD_PHP_VERSION: 8.2.4
-
 jobs:
   windows-cygwin:
-    if: 1
+    name: PHP-${{ matrix.php }} Swoole-${{ matrix.swoole }}
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [8.0.29, 8.1.21, 8.2.8]
+        swoole: [5.0.3, 4.8.13]
+    env:
+      BUILD_PHP_VERSION: ${{ matrix.php }}
+      BUILD_SWOOLE_VERSION: ${{ matrix.swoole }}
     steps:
       - name: Prepare git
         run: |
@@ -65,7 +70,7 @@ jobs:
       - name: production artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: cygwin-php-cli-dist
+          name: php-v${{ env.BUILD_PHP_VERSION }}-swoole-v${{ env.BUILD_SWOOLE_VERSION }}-dist
           path: bin/php-cli.exe
       - name: gh release
         uses: softprops/action-gh-release@v1
@@ -73,6 +78,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: php-cli-v${{ env.BUILD_PHP_VERSION }}-cygwin-x64.tar.xz
+          files: php-v${{ env.BUILD_PHP_VERSION }}-swoole-v${{ env.BUILD_SWOOLE_VERSION }}-cygwin-x64.tar.xz
           draft: true
           prerelease: true

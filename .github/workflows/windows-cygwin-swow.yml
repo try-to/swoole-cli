@@ -1,4 +1,4 @@
-name: build2-windows-swow
+name: windows-swow
 
 on:
   workflow_dispatch:
