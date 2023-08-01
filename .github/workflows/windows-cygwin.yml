@@ -12,6 +12,7 @@ jobs:
       matrix:
         php: [8.0.29, 8.1.21, 8.2.8]
         swoole: [5.0.3, 4.8.13]
+      max-parallel: 2
     env:
       BUILD_PHP_VERSION: ${{ matrix.php }}
       BUILD_SWOOLE_VERSION: ${{ matrix.swoole }}
