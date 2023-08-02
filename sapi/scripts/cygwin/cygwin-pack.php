@@ -2,10 +2,11 @@
 
 $ext = "";
 $ext_swoole = phpversion('swoole');
-$ext_swow = phpversion('swoole');
+$ext_swow = phpversion('swow');
 if (!empty($ext_swoole)) {
     $ext = '-swoole-v' . $ext_swoole;
 }
+
 if (!empty($ext_swow)) {
     $ext = '-swow-v' . $ext_swow;
 }
