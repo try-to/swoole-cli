@@ -1,7 +1,17 @@
 <?php
 
+$ext = "";
+$ext_swoole = phpversion('swoole');
+$ext_swow = phpversion('swoole');
+if (!empty($ext_swoole)) {
+    $ext = '-swoole-v' . $ext_swoole;
+}
+if (!empty($ext_swow)) {
+    $ext = '-swow-v' . $ext_swow;
+}
+
 $src = realpath(__DIR__ . '/../../../');
-$name = "php-cli-v" . PHP_VERSION . "-cygwin-x64";
+$name = "php-v" . PHP_VERSION . $ext . "-cygwin-x64";
 
 $dst = "/tmp/{$name}";
 if (!is_dir($dst)) {
