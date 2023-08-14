@@ -50,7 +50,7 @@ test -f Makefile && make clean
     --with-sodium \
     --enable-xml --enable-simplexml --enable-xmlreader --enable-xmlwriter --enable-dom --with-libxml \
     --enable-gd --with-jpeg  --with-freetype \
-    --enable-swow --enable-swow-ssl --enable-swow-curl \
+    --enable-swow --enable-swow-ssl --enable-swow-curl --enable-swow-pdo-pgsql \
     --enable-redis \
     --with-imagick \
     --with-yaml \

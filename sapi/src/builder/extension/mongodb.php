@@ -26,6 +26,7 @@ return function (Preprocessor $p) {
     $options .= ' --with-mongodb-ssl=openssl ';
     $options .= ' --with-mongodb-sasl=no ';
     $options .= ' --with-mongodb-icu=yes ';
+    $options .= ' --with-mongodb-client-side-encryption=no ';
 
     $ext = new Extension('mongodb');
 
