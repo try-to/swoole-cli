@@ -1,8 +1,8 @@
 name: build-php-cli-linux-x86_64
 
 on:
-  push:
-  pull_request:
+  # push:
+  # pull_request:
   workflow_dispatch:
     inputs:
       build_latest_swoole_or_swow:
