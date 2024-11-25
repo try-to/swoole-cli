@@ -1,10 +1,10 @@
 name: auto-cache-pool-tarball
 
-on:
-  push:
-  pull_request:
-  schedule:
-    - cron: '0 0 */6 * *'
+# on:
+#   push:
+#   pull_request:
+#   schedule:
+#     - cron: '0 0 */6 * *'
 
 jobs:
   auto-cache-pool:
