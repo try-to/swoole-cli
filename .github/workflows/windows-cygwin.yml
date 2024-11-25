@@ -99,6 +99,7 @@ jobs:
           ./bin/php.exe --ri mongodb
           ./bin/php.exe --ri gd
           ./bin/php.exe --ri swoole
+          ./bin/php.exe --ri phpy
           ./bin/php.exe  -r "echo PHP_VERSION;"
 
       - name: get app version with bash
