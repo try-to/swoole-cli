@@ -1,8 +1,8 @@
 name: build-php-cli-macos-x86_64
 
-on:
-  push:
-  pull_request:
+# on:
+#   push:
+#   pull_request:
 
 env:
   BUILD_PHP_VERSION: 8.2.25
