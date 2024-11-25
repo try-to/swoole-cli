@@ -87,6 +87,14 @@ if [ ! -d $ROOT/ext/imagick ]; then
   fi
 fi
 
+if [ ! -d $ROOT/ext/phpy ]; then
+    if [ ! -f phpy-1.0.9.tar.gz ]; then
+        wget https://github.com/swoole/phpy/archive/refs/tags/1.0.9.zip -O phpy-1.0.9.tar.gz
+    fi
+    tar zxvf phpy-1.0.9.tar.gz
+    mv phpy-1.0.9/ext/ $ROOT/ext/phpy
+fi
+
 if [ ! -f swoole-${SWOOLE_VERSION}.tgz ]; then
   test -d /tmp/swoole && rm -rf /tmp/swoole
   git clone -b ${SWOOLE_VERSION} https://github.com/swoole/swoole-src.git /tmp/swoole
