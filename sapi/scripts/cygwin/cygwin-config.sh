@@ -87,7 +87,7 @@ test -f Makefile && make clean
   --with-imagick \
   --with-yaml \
   --with-readline \
-  --with-phpy \
+  --enable-phpy \
   ${OPTIONS}
 
 #  --with-pdo-pgsql \
