@@ -91,7 +91,7 @@ if [ ! -d $ROOT/ext/phpy ]; then
     if [ ! -f phpy-1.0.9.tgz ]; then
         wget https://github.com/swoole/phpy/archive/refs/tags/1.0.9.zip -O phpy-1.0.9.tgz
     fi
-    tar xvf phpy-1.0.9.tar.gz
+    tar xvf phpy-1.0.9.tgz
     mv phpy-1.0.9/ext/ $ROOT/ext/phpy
 fi
 
