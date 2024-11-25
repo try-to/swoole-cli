@@ -88,11 +88,11 @@ if [ ! -d $ROOT/ext/imagick ]; then
 fi
 
 if [ ! -d $ROOT/ext/phpy ]; then
-    if [ ! -f phpy-1.0.9.tgz ]; then
-        wget https://github.com/swoole/phpy/archive/refs/tags/1.0.9.zip -O phpy-1.0.9.tgz
+    if [ ! -f phpy-1.0.9.tar.gz ]; then
+        curl -fSLo phpy-1.0.9.tar.gz https://github.com/swoole/phpy/archive/refs/tags/1.0.9.tar.gz
     fi
-    tar xvf phpy-1.0.9.tgz
-    mv phpy-1.0.9/ext/ $ROOT/ext/phpy
+    tar zxvf phpy-1.0.9.tar.gz
+    mv phpy-1.0.9 $ROOT/ext/phpy
 fi
 
 if [ ! -f swoole-${SWOOLE_VERSION}.tgz ]; then
